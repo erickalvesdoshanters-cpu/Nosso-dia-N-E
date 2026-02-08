@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Feliz Aniversário de Namoro ❤️</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #ffe6e6, #fff0f5);
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .carta {
+      max-width: 700px;
+      background: #F0F8FF;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      border: 3px solid royalblue;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .carta.aberta {
+      opacity: 1;
+      transform: scale(1);
+    }
+    h1 {
+      text-align: center;
+      color: #ff4d6d;
+      font-family: 'Brush Script MT', cursive;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .conteudo {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+      min-height: 150px;
+    }
+    .assinatura {
+      margin-top: 40px;
+      text-align: right;
+      font-family: 'Brush Script MT', cursive;
+      font-size: 24px;
+      color: #444;
+    }
+    .botao {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 24px;
+      background-color: #ff4d6d;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .botao:hover {
+      background-color: #e63e5c;
+    }
+    .surpresa {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
+      color: #b3003c;
+      font-weight: bold;
+      animation: fadeIn 2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Corações flutuando */
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 24px;
+      animation: float 6s infinite;
+      opacity: 0.7;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-200px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-400px) scale(0.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="carta" id="carta">
+    <h1>Feliz Aniversário de Namoro 💖</h1>
+    <div class="conteudo" id="conteudo"></div>
+    <div class="assinatura">Do seu momolado,<br> Erick💕</div>
+    <button class="botao" onclick="mostrarSurpresa()">Revelar Surpresa</button>
+    
+    <div class="surpresa" id="surpresa">
+      Você é o melhor presente da minha vida! 💖
+      <!-- Vídeo aparece junto da mensagem -->
+      <div class="video" id="video" style="margin-top:20px; text-align:center;">
+        <video width="100%" controls>
+          <source src="video.mp4" type="video/mp4">
+          Seu navegador não suporta vídeos.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Texto principal da carta
+    const texto = "Feliz 2 meses de namoro minha vida, quem diria que agora nós estariamos juntos como um casal. Passamos por varias coisas juntos, sempre me divirto quando estou com você, cada piada,cada conversa,cada momento que passo com você é maravilhoso. Temos uma longe jornada juntos. Nem adianta vim depois falar que eu to tirando sua paciência que eu não vou desgrudar não.\n   Sabe vida estou fazendo essa carta no mesmo dia que ta fazendo a sua kkk engraçado né tivemos a mesma ideia, apear de eu não saber o que ta escrevendo eu amei saber quem esta escrevendo pra mim, achei lindo essa borda com os corações. Eu fiquei muito mais muito animado mesmo pra ler o que ta escrevendo kkk quando você ler isso deve ficar surpresa com isso kkk. \nAcho que ja escrevi o bastante kkk, afinal antes de ler isso tem o que ta escrito no caderninho pra você ler ainda amor. Por ultimo eu só quero dizer a você amor que eu te amo muito, você não faz ideia do quão grande é o meu amor por você, você me faz ser uma pessoa melhor, cada dia estou mudando para me tornar melhor pra você amor, as vezes posso cometer erros mais peço que me desculpe caso isso aconteça mais farei o maximo possivel para não cometer erros. você é uma gotosa vida a minha gotosa 💙.";
+
+    const conteudo = document.getElementById("conteudo");
+    let i = 0;
+
+    // Efeito de digitação
+    function digitar() {
+      if (i < texto.length) {
+        conteudo.innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(digitar, 50);
+      }
+    }
+
+    // Abrir carta com animação
+    window.onload = () => {
+      document.getElementById("carta").classList.add("aberta");
+      digitar();
+      criarCoracoes();
+    };
+
+    // Mostrar mensagem surpresa + vídeo
+    function mostrarSurpresa() {
+      document.getElementById("surpresa").style.display = "block";
+    }
+
+    // Criar corações flutuando
+    function criarCoracoes() {
+      for (let j = 0; j < 15; j++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+      }
+    }
+  </script>
+</body>
+</html>
